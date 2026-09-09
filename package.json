@@ -1,0 +1,24 @@
+{
+  "name": "evalley-website",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev -p 3005",
+    "build": "next build",
+    "start": "next start -p 3005"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "next": "^15.4.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "twilio": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^26.5.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "typescript": "^7.0.2"
+  }
+}
