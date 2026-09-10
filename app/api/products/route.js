@@ -24,7 +24,7 @@ export async function GET(request) {
   if (sort === 'price-asc') order = 'p.price ASC';
   if (sort === 'price-desc') order = 'p.price DESC';
 
-  const rows = db.prepare(`
+  const rows = await db.prepare(`
     SELECT p.*,
       (SELECT ROUND(AVG(rating),1) FROM reviews r WHERE r.product_id = p.id AND r.status='Approved') AS rating,
       (SELECT COUNT(*) FROM reviews r WHERE r.product_id = p.id AND r.status='Approved') AS review_count,

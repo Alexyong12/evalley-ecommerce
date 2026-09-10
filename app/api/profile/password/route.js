@@ -20,6 +20,6 @@ export async function POST(request) {
   if (verifyPassword(pw, user.password)) {
     return NextResponse.json({ error: 'New password must be different from the current one.' }, { status: 400 });
   }
-  db.prepare('UPDATE users SET password = ? WHERE id = ?').run(hashPassword(pw), user.id);
+  await db.prepare('UPDATE users SET password = ? WHERE id = ?').run(hashPassword(pw), user.id);
   return NextResponse.json({ ok: true, message: 'Password updated.' });
 }

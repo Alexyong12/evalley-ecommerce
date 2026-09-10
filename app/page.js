@@ -6,11 +6,11 @@ import ProductCard from '@/components/ProductCard';
 
 export const dynamic = 'force-dynamic';
 
-export default function HomePage() {
-  const featured = withRatings('WHERE p.is_featured = 1 ORDER BY p.id LIMIT 8');
-  const bestsellers = withRatings('WHERE p.is_bestseller = 1 ORDER BY p.id LIMIT 8');
-  const categories = db.prepare('SELECT * FROM categories ORDER BY rowid').all();
-  const vendors = db.prepare('SELECT * FROM vendors').all();
+export default async function HomePage() {
+  const featured = await withRatings('WHERE p.is_featured = 1 ORDER BY p.id LIMIT 8');
+  const bestsellers = await withRatings('WHERE p.is_bestseller = 1 ORDER BY p.id LIMIT 8');
+  const categories = await db.prepare('SELECT * FROM categories ORDER BY rowid').all();
+  const vendors = await db.prepare('SELECT * FROM vendors').all();
 
   return (
     <div className="container">

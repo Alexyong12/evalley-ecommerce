@@ -7,9 +7,9 @@ export const dynamic = 'force-dynamic';
 
 export default async function VendorPage({ params }) {
   const { slug } = await params;
-  const vendor = db.prepare('SELECT * FROM vendors WHERE slug = ?').get(slug);
+  const vendor = await db.prepare('SELECT * FROM vendors WHERE slug = ?').get(slug);
   if (!vendor) return <div className="container empty"><h1>404</h1><p>Seller not found.</p></div>;
-  const products = withRatings('WHERE p.vendor = ?', [slug]);
+  const products = await withRatings('WHERE p.vendor = ?', [slug]);
   return (
     <div className="container" style={{ marginTop: 24 }}>
       <div className="breadcrumb"><Link href="/vendors">All sellers</Link></div>

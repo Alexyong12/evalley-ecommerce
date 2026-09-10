@@ -4,8 +4,8 @@ import db from '@/lib/db';
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Categories · Evalley' };
 
-export default function CategoriesPage() {
-  const categories = db.prepare('SELECT * FROM categories ORDER BY rowid').all();
+export default async function CategoriesPage() {
+  const categories = await db.prepare('SELECT * FROM categories ORDER BY rowid').all();
   return (
     <div className="container" style={{ marginTop: 24 }}>
       <h1>Categories</h1>

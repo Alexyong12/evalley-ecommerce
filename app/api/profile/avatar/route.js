@@ -21,6 +21,6 @@ export async function POST(request) {
   }
   const buf = Buffer.from(await file.arrayBuffer());
   const dataUri = `data:${file.type};base64,${buf.toString('base64')}`;
-  db.prepare('UPDATE users SET avatar = ? WHERE id = ?').run(dataUri, user.id);
+  await db.prepare('UPDATE users SET avatar = ? WHERE id = ?').run(dataUri, user.id);
   return NextResponse.json({ ok: true, message: 'Photo updated.', avatar: dataUri });
 }

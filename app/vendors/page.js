@@ -4,8 +4,8 @@ import db from '@/lib/db';
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Featured sellers · Evalley' };
 
-export default function VendorsPage() {
-  const vendors = db.prepare('SELECT * FROM vendors ORDER BY name').all();
+export default async function VendorsPage() {
+  const vendors = await db.prepare('SELECT * FROM vendors ORDER BY name').all();
   return (
     <div className="container" style={{ marginTop: 24 }}>
       <h1>Featured sellers</h1>

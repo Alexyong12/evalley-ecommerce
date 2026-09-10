@@ -25,7 +25,7 @@ export async function POST(request) {
   if (passwordError) return err(passwordError);
   if (password !== confirmation) return err('Passwords do not match.');
 
-  const existing = db.prepare('SELECT id FROM users WHERE identifier = ?').get(identifier);
+  const existing = await db.prepare('SELECT id FROM users WHERE identifier = ?').get(identifier);
   if (existing) return err('That email or phone is already registered.');
 
   let code = FALLBACK_OTP_CODE;
@@ -36,7 +36,7 @@ export async function POST(request) {
   }
 
   const payload = JSON.stringify({ name, identifier, type, birthdate, password });
-  db.prepare(`INSERT INTO otps (identifier, purpose, code, payload, attempts, expires_at, last_sent)
+  await db.prepare(`INSERT INTO otps (identifier, purpose, code, payload, attempts, expires_at, last_sent)
     VALUES (?, 'register', ?, ?, 0, ?, ?)
     ON CONFLICT(identifier, purpose) DO UPDATE SET code=excluded.code, payload=excluded.payload,
       attempts=0, expires_at=excluded.expires_at, last_sent=excluded.last_sent`)
